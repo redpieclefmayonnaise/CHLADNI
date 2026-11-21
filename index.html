@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08090d" />
+    <meta name="description" content="CHLADNI turns your music into living mathematical patterns. A private, browser-based sound visualization." />
+    <title>CHLADNI — Sound made visible</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="CHLADNI home"><span class="brand-mark">C</span><span>CHLADNI</span></a>
+        <div class="top-note"><span class="live-dot"></span> A STUDY IN SOUND &amp; FORM</div>
+        <button class="icon-button" id="about-button" aria-label="About CHLADNI">?</button>
+      </header>
+
+      <main>
+        <section class="hero-copy">
+          <div class="eyebrow">CYMATICS, IN MOTION</div>
+          <h1>Sound made <em>visible.</em></h1>
+          <p>Every frequency leaves a shape. Give the plate a signal and watch its hidden geometry unfold.</p>
+        </section>
+
+        <section class="stage" aria-label="Chladni visualization">
+          <div id="visualizer" class="visualizer"></div>
+          <div class="stage-grain"></div>
+          <div class="stage-topline"><span id="mode-label">PLATE MODE · 03 / 05</span><span id="stage-state">AWAITING A SIGNAL</span></div>
+          <div class="stage-caption"><span class="caption-line"></span><span id="pattern-caption">A surface waiting to resonate</span></div>
+          <div class="stage-freq"><span id="frequency-readout">—</span><small>DOMINANT TONE</small></div>
+          <div class="stage-index" id="plate-profile">FREE OUTER RIM <span>·</span> ALUMINUM <span>·</span> Ø200 × 1 MM</div>
+          <div class="view-controls" aria-label="Plate camera controls">
+            <button class="view-choice" id="view-side" aria-label="Side view" title="Side view">SIDE</button>
+            <button class="view-choice selected" id="view-top" aria-label="Top view" title="Top view">TOP</button>
+            <button class="view-icon" id="zoom-out" aria-label="Zoom out" title="Zoom out">−</button>
+            <button class="view-icon" id="zoom-in" aria-label="Zoom in" title="Zoom in">+</button>
+            <button class="view-icon" id="view-reset" aria-label="Reset camera" title="Reset view">↺</button>
+          </div>
+          <div class="camera-hint">DRAG TO TILT · SCROLL TO ZOOM</div>
+        </section>
+
+        <section class="workspace">
+          <div class="track-panel youtube-panel">
+            <div class="section-label"><span>01</span> YOUTUBE SOURCE</div>
+            <form class="youtube-form" id="youtube-form">
+              <label for="youtube-url">PASTE A VIDEO LINK</label>
+              <div class="youtube-input-row"><input id="youtube-url" type="url" inputmode="url" placeholder="Paste a YouTube link" autocomplete="url" /><button type="submit" id="youtube-load">LOAD LINK <span>↗</span></button></div>
+              <div class="youtube-feedback" id="youtube-feedback" aria-live="polite">Playback stays in YouTube. Share this tab’s audio to drive the plate with its live spectrum.</div>
+              <button class="capture-button" id="capture-youtube-audio" type="button" hidden>ENABLE LIVE TAB AUDIO</button>
+              <div class="youtube-player-shell" id="youtube-player-shell" hidden><div id="youtube-player"></div></div>
+            </form>
+          </div>
+
+          <div class="controls-panel">
+            <div class="section-label"><span>02</span> PLAYBACK</div>
+            <div class="player">
+              <div class="timeline-row"><span id="current-time">0:00</span><input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek" /><span id="duration">0:00</span></div>
+              <div class="player-buttons"><button class="round-control" id="back-button" aria-label="Back 10 seconds">↶<small>10</small></button><button class="play-button" id="play-button" aria-label="Play" disabled><span id="play-icon">▶</span></button><button class="round-control" id="forward-button" aria-label="Forward 10 seconds">↷<small>10</small></button><div class="volume-control"><span>VOL</span><input id="volume" type="range" min="0" max="1" step="0.01" value="0.78" aria-label="Volume" /></div></div>
+            </div>
+            <div class="section-label viz-label"><span>03</span> VISUAL RESPONSE</div>
+            <div class="viz-options">
+              <div class="option-row"><span>PARTICLE TYPE</span><span class="particle-value">LIGHT ORBS</span></div>
+              <div class="option-row relief-row"><label for="particle-size-control">PARTICLE SIZE</label><div class="relief-control"><input id="particle-size-control" type="range" min="0.5" max="2.5" step="0.1" value="0.6" aria-label="Particle size" /><output id="particle-size-value">0.6×</output></div></div>
+              <div class="option-row"><span>MODE TRACKING</span><span class="auto-indicator"><i></i>LIVE AUTO</span></div>
+              <div class="option-row relief-row"><label for="relief-control">FLEX EXAGGERATION</label><div class="relief-control"><input id="relief-control" type="range" min="0.7" max="2.4" step="0.1" value="1.7" aria-label="Visible plate flex exaggeration" /><output id="relief-value">1.7×</output></div></div>
+              <p class="option-note">Boosts the plate’s up/down motion so it’s visible in 3D. It does not change the nodal pattern or particle settling.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="bottom-note"><div class="bottom-rule"></div><p>Inspired by Ernst Chladni’s vibrating plates. Built from <span>mathematics, light, and whatever you’re listening to.</span></p><span class="local-tag"><i></i> LOCAL BY DESIGN</span></section>
+      </main>
+      <footer><span>© 2026</span><span>NO UPLOADS. NO TRACKING. JUST SOUND.</span><a href="https://threejs.org/" target="_blank" rel="noreferrer">POWERED BY THREE.JS ↗</a></footer>
+    </div>
+    <dialog id="about-dialog"><button class="dialog-close" id="dialog-close" aria-label="Close">×</button><div class="eyebrow">ABOUT THE EXPERIMENT</div><h2>Music, rendered as matter.</h2><p>CHLADNI maps live audio to an ideal circular aluminum plate. Several prominent spectral peaks excite a weighted mix of plate modes; grains are driven by the vibrating surface and settle toward low-displacement nodal regions. The fixed model uses a 200 mm diameter, 1 mm thickness, and a free outer rim.</p><p>YouTube playback provides timing but not raw spectrum. For live spectral response, choose this tab and share its audio when prompted. The browser analyzes the shared tab audio locally.</p></dialog>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
